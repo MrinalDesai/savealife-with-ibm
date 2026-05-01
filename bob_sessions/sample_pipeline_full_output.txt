@@ -1,0 +1,253 @@
+C:\Users\mrina\Downloads\IBM_HACKATHON\venv\Lib\site-packages\ibm_watsonx_ai\foundation_models\inference\base_model_inference.py:645: UserWarning: Parameters [max_new_tokens] is/are not recognized and will be ignored.
+  warn(invalid_params_warning)
+[2/5] Triage Agent...
+[3/5] Find Best Hospital...
+[4/5] First Aid Agent...
+[5/5] ER Handoff Agent...
+
+✅ Pipeline completed successfully
+
+================================================================================
+📊 COMPLETE PIPELINE RESULT
+================================================================================
+
+{
+  "bystander_report": "A motorcycle hit a divider near Bandra. The rider is on the ground, not moving. He's breathing but barely conscious. There's blood near his head.",
+  "incident_location": {
+    "lat": 19.059,
+    "lon": 72.8295
+  },
+  "started_at": "2026-05-01T16:56:59.908331",
+  "completed_at": "2026-05-01T16:57:23.630491",
+  "triage": {
+    "priority": "P1",
+    "priority_reason": "Unconscious with potential airway compromise and severe head injury",    
+    "victim_count": 1,
+    "primary_injuries": [
+      "head trauma",
+      "possible spinal injury"
+    ],
+    "consciousness": "UNCONSCIOUS",
+    "bleeding": "MINOR",
+    "mobility": "IMMOBILE",
+    "suspected_systems": [
+      "HEAD_NECK",
+      "SPINE"
+    ],
+    "special_considerations": [],
+    "specialty_needed": [
+      "neurosurgery",
+      "trauma"
+    ],
+    "confidence": 0.85,
+    "missing_information": [
+      "exact mechanism of injury",
+      "presence of other injuries"
+    ]
+  },
+  "first_aid": {
+    "steps": [
+      "Call emergency services (112) immediately if not already done.",
+      "Check if the person is breathing. If not, start CPR.",
+      "Keep the person lying on their side to prevent choking.",
+      "Do not move the person unless they are in immediate danger.",
+      "Monitor breathing and responsiveness until help arrives.",
+      "Reassure the person and keep them warm."
+    ],
+    "do_not_do": [
+      "Do not attempt to move the person's head or neck.",
+      "Do not give the person anything to eat or drink.",
+      "Do not remove the person's helmet if they are wearing one."
+    ],
+    "call_emergency_now": true
+  },
+  "hospital": {
+    "id": "H004",
+    "name": "Coastal Emergency Hospital",
+    "lat": 18.975,
+    "lon": 72.8258,
+    "type": "hospital",
+    "specialties": [
+      "trauma",
+      "emergency",
+      "surgery"
+    ],
+    "beds": 200,
+    "emergency_available": true,
+    "distance_km": 9.3484693109488,
+    "eta_min": 19,
+    "match_score": 0.3483163243737887,
+    "match_reason": "9.3 km \u00b7 ETA 19 min \u00b7 surgery, trauma match",
+    "alternatives": [
+      {
+        "id": "H003",
+        "name": "Sunrise Healthcare",
+        "lat": 19.033,
+        "lon": 72.857,
+        "type": "hospital",
+        "specialties": [
+          "pediatrics",
+          "general",
+          "trauma"
+        ],
+        "beds": 120,
+        "emergency_available": true,
+        "distance_km": 4.088160321398386,
+        "eta_min": 8,
+        "match_score": 0.248267343876182,
+        "match_reason": "4.1 km \u00b7 ETA 8 min \u00b7 trauma match"
+      },
+      {
+        "id": "H001",
+        "name": "Central City Hospital",
+        "lat": 19.076,
+        "lon": 72.8777,
+        "type": "hospital",
+        "specialties": [
+          "trauma",
+          "cardiology",
+          "neurology"
+        ],
+        "beds": 250,
+        "emergency_available": true,
+        "distance_km": 5.406751300999486,
+        "eta_min": 11,
+        "match_score": 0.22804267350318363,
+        "match_reason": "5.4 km \u00b7 ETA 11 min \u00b7 trauma match"
+      }
+    ]
+  },
+  "nearest_pharmacy": {
+    "id": "P002",
+    "name": "MediCare Drug Store",
+    "lat": 19.0521,
+    "lon": 72.8774,
+    "type": "pharmacy",
+    "hours": "08:00-22:00",
+    "services": [
+      "prescription",
+      "otc",
+      "consultation"
+    ],
+    "distance_km": 5.092501388506255,
+    "eta_min": 10
+  },
+  "nearest_blood_bank": {
+    "id": "BB001",
+    "name": "City Blood Bank",
+    "lat": 19.052,
+    "lon": 72.851,
+    "type": "blood_bank",
+    "phone": "022-24567890",
+    "hours": "24x7",
+    "notes": "Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins accepted.",
+    "distance_km": 2.3899873763531265,
+    "eta_min": 5
+  },
+  "handoff": {
+    "incoming_alert": "P1 trauma alert: 1 unconscious patient with head & possible spinal injury",
+    "preparation_checklist": [
+      "Assign Level 1 trauma bay",
+      "Prepare CT scanner for head & cervical spine",
+      "Set up OR for potential craniotomy",
+      "Cross-match 4 units PRBCs, 2 units FFP",
+      "Page neurosurgery and trauma surgery on-call"
+    ],
+    "specialist_pages": [
+      "Neurosurgery on-call",
+      "Trauma surgery on-call"
+    ],
+    "anticipated_interventions": [
+      "Rapid sequence intubation",
+      "Cervical collar placement",
+      "IV access and fluid resuscitation"
+    ],
+    "information_gaps": [
+      "Exact mechanism of injury",
+      "Pupil size and reactivity",
+      "Presence of seizure activity",
+      "Last known normal"
+    ]
+  },
+  "warnings": [],
+  "agent_log": [
+    {
+      "stage": "Load Facilities",
+      "step": 1,
+      "duration_sec": 8.013,
+      "timestamp": "2026-05-01T16:57:07.921666"
+    },
+    {
+      "stage": "Triage Agent",
+      "step": 2,
+      "duration_sec": 4.456,
+      "timestamp": "2026-05-01T16:57:12.378034"
+    },
+    {
+      "stage": "Find Best Hospital",
+      "step": 3,
+      "duration_sec": 0.001,
+      "timestamp": "2026-05-01T16:57:12.379111"
+    },
+    {
+      "stage": "First Aid Agent",
+      "step": 4,
+      "duration_sec": 7.328,
+      "timestamp": "2026-05-01T16:57:19.707196"
+    },
+    {
+      "stage": "ER Handoff Agent",
+      "step": 5,
+      "duration_sec": 3.923,
+      "timestamp": "2026-05-01T16:57:23.630491"
+    }
+  ]
+}
+
+================================================================================
+📋 SUMMARY
+================================================================================
+
+⏱️  Total Duration:
+   23.72 seconds
+
+🚨 Triage Assessment:
+   Priority: P1
+   Victim count: 1
+   Consciousness: UNCONSCIOUS
+   Bleeding: MINOR
+   Confidence: 0.85
+
+🏥 Hospital Assignment:
+   Name: Coastal Emergency Hospital
+   Distance: 9.3 km
+   ETA: 19 minutes
+   Match score: 0.348
+   Reason: 9.3 km · ETA 19 min · surgery, trauma match
+   Alternatives: 2 other hospitals
+
+🩹 First-Aid Instructions:
+   Steps provided: 6
+   1. Call emergency services (112) immediately if not already don...
+   2. Check if the person is breathing. If not, start CPR.
+   3. Keep the person lying on their side to prevent choking.
+
+📞 ER Handoff Brief:
+   Alert: P1 trauma alert: 1 unconscious patient with head & possible spinal injury
+   Preparation items: 5
+   Specialists to page: 2
+   Anticipated interventions: 3
+
+💊 Nearest Pharmacy:
+   Name: MediCare Drug Store
+   Distance: 5.1 km
+   ETA: 10 minutes
+
+🩸 Nearest Blood Bank:
+   Name: City Blood Bank
+   Distance: 2.4 km
+   ETA: 5 minutes
+
+================================================================================
+✅ END-TO-END TEST COMPLETE
+================================================================================

@@ -1,0 +1,46 @@
+[
+  {
+    "id": "P001",
+    "name": "HealthPlus Pharmacy",
+    "location": {
+      "latitude": 19.0896,
+      "longitude": 72.8656
+    },
+    "type": "pharmacy",
+    "hours": "24/7",
+    "services": ["prescription", "otc", "emergency_supplies"]
+  },
+  {
+    "id": "P002",
+    "name": "MediCare Drug Store",
+    "location": {
+      "latitude": 19.0521,
+      "longitude": 72.8774
+    },
+    "type": "pharmacy",
+    "hours": "08:00-22:00",
+    "services": ["prescription", "otc", "consultation"]
+  },
+  {
+    "id": "P003",
+    "name": "QuickMeds Express",
+    "location": {
+      "latitude": 19.1197,
+      "longitude": 72.9056
+    },
+    "type": "pharmacy",
+    "hours": "24/7",
+    "services": ["prescription", "otc", "emergency_supplies", "delivery"]
+  },
+  {
+    "id": "P004",
+    "name": "City Center Pharmacy",
+    "location": {
+      "latitude": 18.9912,
+      "longitude": 72.8314
+    },
+    "type": "pharmacy",
+    "hours": "09:00-21:00",
+    "services": ["prescription", "otc"]
+  }
+]

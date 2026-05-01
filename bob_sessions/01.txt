@@ -1,0 +1,53 @@
+I'm building a project called "SaveAlife with IBM" for the IBM Bob Dev Day Hackathon. The product is an AI-coordinated trauma response system for road accidents — bystanders submit accident reports, AI agents triage them, and the system pre-alerts the right hospitals, pharmacies, and blood banks. The hackathon theme is "Turn idea into impact faster" — so a key selling point is that Bob itself is used to rapidly integrate new healthcare facility data sources.
+Please create the initial project structure for this. The project root is the current folder (IBM_HACKATHON).
+Tech stack:
+
+Python 3.11+
+Streamlit for the UI
+IBM watsonx.ai (Granite 3 Instruct) for the AI agents — accessed via the ibm-watsonx-ai SDK
+python-dotenv for credentials
+pandas for data loading
+
+Folder structure to create:
+IBM_HACKATHON/
+├── app.py                       (Streamlit entry — leave as a placeholder for now)
+├── pipeline.py                  (orchestrates the agents — placeholder for now)
+├── config.py                    (constants, priority levels, watsonx settings)
+├── prompts.py                   (LLM prompts — placeholder, I'll provide content later)
+├── requirements.txt
+├── .env.example
+├── .gitignore
+├── README.md
+├── agents/
+│   ├── __init__.py
+│   ├── triage_agent.py          (placeholder)
+│   ├── first_aid_agent.py       (placeholder)
+│   └── handoff_agent.py         (placeholder)
+├── data_sources/
+│   ├── __init__.py
+│   ├── adapter_base.py          (abstract base class for data adapters)
+│   ├── hospitals_csv.py         (placeholder adapter for CSV-format hospitals)
+│   ├── pharmacies_json.py       (placeholder adapter for JSON-format pharmacies)
+│   └── bloodbanks_text.py       (placeholder for unstructured-text blood bank data)
+├── data/
+│   ├── hospitals.csv            (you'll generate 5 sample Mumbai hospital rows)
+│   ├── pharmacies.json          (you'll generate 4 sample pharmacy entries)
+│   └── bloodbanks.txt           (you'll generate 3 sample blood banks in messy unstructured text)
+├── utils/
+│   ├── __init__.py
+│   ├── watsonx_client.py        (placeholder for watsonx wrapper)
+│   └── facility_matcher.py      (placeholder for distance + capability matching)
+└── bob_sessions/                (already exists — for hackathon session exports)
+For this first task, just do these specific things:
+
+Create the folder structure above
+Write requirements.txt with: streamlit, ibm-watsonx-ai, python-dotenv, pandas
+Write .env.example with placeholder env vars: WATSONX_API_KEY, WATSONX_PROJECT_ID, WATSONX_URL=https://us-south.ml.cloud.ibm.com
+Write .gitignore with .env, venv/, __pycache__/, *.pyc, .DS_Store
+Write a short README.md with the project name, tagline ("AI-coordinated trauma response — built solo with IBM Bob"), and a "Setup" section with the standard Python venv steps
+Write data_sources/adapter_base.py — an abstract base class FacilityAdapter with abstract methods load() -> list[dict] and facility_type() -> str. Each loaded record must include keys: id, name, lat, lon, type.
+Generate the three sample data files (data/hospitals.csv, data/pharmacies.json, data/bloodbanks.txt) with realistic-looking but fake Mumbai-area data. The blood banks file should be deliberately messy (e.g., entries like "City Blood Bank — at 19.05N, 72.85E — phone 022-XXXXXXX — open 24x7" — to demonstrate that unstructured data needs an LLM to parse).
+For hospitals_csv.py, pharmacies_json.py, and bloodbanks_text.py: just create the files with a class skeleton that inherits from FacilityAdapter, with load() raising NotImplementedError for now. We'll fill in the parsing logic in subsequent tasks.
+
+Leave all other Python files (app.py, pipeline.py, config.py, prompts.py, agent files, utils/*) as one-line placeholder files (just a docstring saying "TODO: implementation").
+Do not install dependencies, run any code, or attempt to call watsonx. Just create files.

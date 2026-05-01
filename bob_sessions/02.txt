@@ -1,0 +1,70 @@
+Task: Implement the three data source adapters.
+Context: This project (SaveAlife with IBM) is an emergency-response system. New healthcare facilities arrive in different data formats — CSVs, JSONs, even unstructured prose. We need adapters that parse each format into a uniform list of dicts. A core goal of this project is to demonstrate Bob's ability to rapidly integrate new data sources — so quality and clean structure matter.
+All adapters inherit from data_sources/adapter_base.py:FacilityAdapter. The output dict from load() must have these keys at minimum: id, name, lat, lon, type. They may include extra keys when relevant.
+
+1. data_sources/hospitals_csv.py — HospitalsCsvAdapter
+
+Reads data/hospitals.csv using pandas
+facility_type() returns "hospital"
+load() returns a list of dicts. Each dict must have: id, name, lat, lon, type ("hospital"), plus any other CSV columns passed through (e.g., trauma_level, specialties, beds_available if those columns exist)
+Convert lat and lon to floats. Convert numeric fields to numbers. Strip whitespace from string fields.
+If a column called specialties contains a comma-separated string, split it into a list.
+Handle the case where the CSV is empty or columns are missing — raise a clear ValueError with which column is missing.
+
+
+2. data_sources/pharmacies_json.py — PharmaciesJsonAdapter
+
+Reads data/pharmacies.json
+facility_type() returns "pharmacy"
+The JSON file may be either a list of pharmacy objects or an object with a top-level "pharmacies" key wrapping the list — handle both shapes
+Each output dict must have: id, name, lat, lon, type ("pharmacy"), plus any other JSON keys (e.g., is_24x7, stock_categories)
+Coordinates may appear in the source JSON as a "location": {"lat": ..., "lon": ...} nested object OR as flat lat/lon keys — flatten this so the output always uses flat lat/lon
+
+
+3. data_sources/bloodbanks_text.py — BloodBanksTextAdapter
+This is the interesting one. The source data/bloodbanks.txt contains messy human-written entries about blood banks — names, locations as approximate coordinates or addresses, phone numbers, hours, sometimes inventory notes. Parsing it with regex would be brittle. Use IBM watsonx.ai's Granite Instruct model to extract structured records.
+
+facility_type() returns "blood_bank"
+load() reads the entire data/bloodbanks.txt file, then uses the watsonx.ai client (utils/watsonx_client.py) to extract a list of structured blood bank records
+Each output dict must have: id (auto-generated like BB001, BB002...), name, lat, lon, type ("blood_bank"), phone (if present), hours (if present), notes (anything else worth keeping)
+Use a clear, strict prompt that tells Granite to return ONLY a JSON array of objects with the required keys, no prose, no markdown fences
+Be tolerant of the model's output: strip markdown code fences if present, find the first [ and last ] if there's prefix/suffix text
+If watsonx.ai is not configured (no API key), load() should raise a clear RuntimeError saying "watsonx.ai credentials not configured — see .env.example"
+
+Since utils/watsonx_client.py is currently a placeholder, also implement that file as part of this task:
+
+4. utils/watsonx_client.py — watsonx.ai SDK wrapper
+
+Read credentials from environment variables WATSONX_API_KEY, WATSONX_PROJECT_ID, WATSONX_URL (use python-dotenv so a .env file is auto-loaded)
+Default model: ibm/granite-3-8b-instruct
+Expose two functions:
+
+watsonx_chat(prompt: str, system: str = "", model_id: str | None = None) -> str — returns raw text
+watsonx_json(prompt: str, system: str = "", model_id: str | None = None) -> Any — returns parsed JSON (object or list), tolerant of markdown fences
+
+
+Use the ibm_watsonx_ai package: from ibm_watsonx_ai import Credentials and from ibm_watsonx_ai.foundation_models import ModelInference
+Reasonable defaults: decoding_method="greedy", max_new_tokens=1500, temperature=0.1
+Raise RuntimeError with a clear message if credentials are missing
+
+
+5. Create one quick test script: tests/test_adapters.py
+
+A simple Python script (not pytest) that:
+
+Loads HospitalsCsvAdapter, prints how many hospitals were loaded and the first one
+Loads PharmaciesJsonAdapter, prints how many pharmacies were loaded and the first one
+Skips the blood banks adapter test if WATSONX_API_KEY is not set, otherwise loads and prints
+
+
+Runnable as python tests/test_adapters.py
+Must work even if tests/ doesn't exist yet — create the folder
+
+
+Constraints:
+
+Don't run any code or install anything — just write the files
+Don't create a .env file — only the example
+Keep imports clean and Python 3.11+ compatible
+Add concise docstrings on each class explaining what it does and what format it expects
+Don't refactor adapter_base.py — it's already correct

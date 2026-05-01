@@ -1,0 +1,104 @@
+(venv) PS C:\Users\mrina\Downloads\IBM_HACKATHON> python tests\test_adapters.py
+
+============================================================
+ADAPTER TESTS
+============================================================
+
+============================================================
+Testing HospitalsCsvAdapter
+============================================================
+✓ Successfully loaded 5 hospitals
+✓ Facility type: hospital
+
+First hospital:
+  id: H001
+  name: Central City Hospital
+  lat: 19.076
+  lon: 72.8777
+  type: hospital
+  specialties: ['trauma', 'cardiology', 'neurology']
+  beds: 250
+  emergency_available: True
+
+============================================================
+Testing PharmaciesJsonAdapter
+============================================================
+✓ Successfully loaded 4 pharmacies
+✓ Facility type: pharmacy
+
+First pharmacy:
+  id: P001
+  name: HealthPlus Pharmacy
+  lat: 19.0896
+  lon: 72.8656
+  type: pharmacy
+  hours: 24/7
+  services: ['prescription', 'otc', 'emergency_supplies']
+
+============================================================
+Testing BloodBanksTextAdapter
+============================================================
+C:\Users\mrina\Downloads\IBM_HACKATHON\venv\Lib\site-packages\ibm_watsonx_ai\foundation_models\inference\base_model_inference.py:645: UserWarning: Parameters [decoding_method, max_new_tokens] is/are not recognized and will be ignored.
+  warn(invalid_params_warning)
+✓ Successfully loaded 3 blood banks
+✓ Facility type: blood_bank
+
+First blood bank:
+  id: BB001
+  name: City Blood Bank
+  lat: 19.052
+  lon: 72.851
+  type: blood_bank
+  phone: 022-24567890
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins a  hours: 24x7
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins accepted
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins a  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins accepted
+
+============================================================
+SUMMARY
+============================================================
+Passed:  3
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins accepted
+
+============================================================
+SUMMARY
+============================================================
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins accepted
+
+============================================================
+SUMMARY
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins accepted
+
+============================================================
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins accepted
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins a  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  hours: 24x7
+  notes: Available: A+, B+, O+, AB+, O- (limited stock). Emergency services available, walk-ins accepted
+
+============================================================
+SUMMARY
+============================================================
+Passed:  3
+Failed:  0
+Skipped: 0
+
+All tests passed or skipped!

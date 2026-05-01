@@ -1,0 +1,34 @@
+Mumbai Urgent Care Clinics - Partner Network Data Export
+
+=== CLINIC 1 ===
+QuickCare Medical Center - Bandra West
+Location: 19.0654, 72.8302
+Contact: +91 22-26420789
+Hours: Open 7am to midnight daily
+Services: x-ray onsite, minor procedures, vaccination available, wound care
+Notes: Walk-ins welcome. Parking available on premises.
+
+=== CLINIC 2 ===
+HealthFirst Urgent Care
+Neighborhood: Khar West (near Linking Road)
+Phone: +91 22-26051234
+Operating: 24/7 except Sundays (closed 2pm-6pm Sunday)
+Available services: Minor surgeries, x-ray imaging, blood tests, vaccinations, IV therapy
+Additional info: Accepts most insurance. Pediatric care available.
+
+=== CLINIC 3 ===
+Santacruz Express Clinic
+Area: Santacruz East, near railway station
+Coordinates: Lat 19.0825 / Long 72.8417
+Contact number: +91 22-26604567
+Open hours: Monday-Saturday 8am-10pm, Sunday 9am-6pm
+Services offered: x-ray onsite, minor procedures including suturing, vaccinations, sports injury treatment, occupational health
+Note: Corporate tie-ups available. On-site pharmacy.
+
+=== CLINIC 4 ===
+Andheri MediQuick Center
+Located in: Andheri East
+Phone: +91 22-28204890
+Timings: open 6am to 11pm every day
+Services: vaccination available, minor procedures, x-ray, ultrasound, ECG, nebulization
+Remarks: Multi-specialty urgent care. Ambulance service on call. Accepts emergency cases.

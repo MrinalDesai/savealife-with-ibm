@@ -1,0 +1,111 @@
+(venv) PS C:\Users\mrina\Downloads\IBM_HACKATHON> python tests\test_pipeline.py
+================================================================================
+SaveAlife AI Pipeline Integration Test
+================================================================================
+
+📝 BYSTANDER REPORT:
+   A motorcycle hit a divider near Bandra. The rider is on the ground, not moving. He's breathing but barely conscious. There's blood near his head.
+
+--------------------------------------------------------------------------------
+🔍 STEP 1: TRIAGE ASSESSMENT
+--------------------------------------------------------------------------------
+C:\Users\mrina\Downloads\IBM_HACKATHON\venv\Lib\site-packages\ibm_watsonx_ai\foundation_models\inference\base_model_inference.py:645: UserWarning: Parameters [decoding_method, max_new_tokens] is/are not recognized and will be ignored.
+  warn(invalid_params_warning)
+✅ Triage completed successfully
+
+Triage Result:
+{
+  "priority": "P1",
+  "priority_reason": "Unconscious with breathing difficulty and blood near head suggests potential airway compromise and severe head injury",
+  "victim_count": 1,
+  "primary_injuries": [
+    "head trauma",
+    "possible spinal injury"
+  ],
+  "consciousness": "UNCONSCIOUS",
+  "bleeding": "MINOR",
+  "mobility": "IMMOBILE",
+  "suspected_systems": [
+    "HEAD_NECK",
+    "SPINE"
+  ],
+  "special_considerations": [
+    "motorcycle accident",
+    "potential spinal injury"
+  ],
+  "specialty_needed": [
+    "neurosurgery",
+    "trauma"
+  ],
+  "confidence": 0.85,
+  "missing_information": [
+    "exact mechanism of injury",
+    "presence of other injuries"
+  ]
+}
+
+--------------------------------------------------------------------------------
+🩹 STEP 2: FIRST-AID INSTRUCTIONS
+--------------------------------------------------------------------------------
+✅ First-aid guidance generated successfully
+
+First-Aid Result:
+{
+  "steps": [
+    "Call emergency services (112) immediately if not already done.",
+    "Do not move the victim. Suspected spinal injury.",
+    "Check if the victim is breathing. If not, start CPR.",
+    "Control minor bleeding with clean cloth or bandage.",
+    "Keep the victim warm and still until help arrives.",
+    "Reassure the victim and monitor breathing continuously."
+  ],
+  "do_not_do": [
+    "Do not attempt to remove helmet or move victim.",
+    "Do not give anything to drink or eat.",
+    "Do not try to wake an unconscious victim."
+  ],
+  "call_emergency_now": true
+}
+
+--------------------------------------------------------------------------------
+🏥 STEP 3: ER HANDOFF BRIEF
+--------------------------------------------------------------------------------
+✅ ER handoff brief generated successfully
+
+Handoff Result:
+{
+  "incoming_alert": "P1 trauma alert: motorcycle crash, unconscious, possible spinal injury",    
+  "preparation_checklist": [
+    "Assign Level 1 trauma bay",
+    "Prepare cervical collar and spine board",
+    "Cross-match 2 units O-negative PRBCs",
+    "Set up CT scanner for head and cervical spine",
+    "Page neurosurgery and orthopedic trauma teams",
+    "Prepare airway equipment including video laryngoscope"
+  ],
+  "specialist_pages": [
+    "Neurosurgery on-call",
+    "Orthopedic trauma team"
+  ],
+  "anticipated_interventions": [
+    "Rapid sequence intubation",
+    "Spine immobilization",
+    "Hemodynamic monitoring"
+  ],
+  "information_gaps": [
+    "Exact mechanism of injury",
+    "Glasgow Coma Scale on scene",
+    "Presence of helmet",
+    "Witnesses to the accident"
+  ]
+}
+
+================================================================================
+✅ PIPELINE TEST COMPLETE
+================================================================================
+
+Summary:
+  • Priority: P1
+  • Victim count: 1
+  • First-aid steps: 6
+  • Specialists to page: 2

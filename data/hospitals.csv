@@ -1,0 +1,6 @@
+id,name,lat,lon,type,specialties,beds,emergency_available
+H001,Central City Hospital,19.0760,72.8777,hospital,"trauma,cardiology,neurology",250,true
+H002,Metro Medical Center,19.1136,72.8697,hospital,"trauma,orthopedics,general",180,true
+H003,Sunrise Healthcare,19.0330,72.8570,hospital,"pediatrics,general,trauma",120,true
+H004,Coastal Emergency Hospital,18.9750,72.8258,hospital,"trauma,emergency,surgery",200,true
+H005,North District Clinic,19.2183,72.9781,hospital,"general,outpatient",80,false
