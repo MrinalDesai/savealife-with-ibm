@@ -2,3 +2,6 @@ streamlit
 ibm-watsonx-ai
 python-dotenv
 pandas
+qrcode[pil]
+faster-whisper
+streamlit-mic-recorder
