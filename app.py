@@ -28,6 +28,7 @@ APP_VERSION = "0.1.0"
 
 DEFAULT_INCIDENT_LAT = 19.0590
 DEFAULT_INCIDENT_LON = 72.8295
+DEFAULT_INCIDENT_ADDRESS = "Bandra West, Mumbai, Maharashtra"
 
 PRIORITY_INFO = {
     "P1": {"label": "IMMEDIATE", "color": "#EF4444", "bg": "#7F1D1D",
@@ -378,6 +379,34 @@ def render_priority_banner(priority: str):
     st.markdown(banner_html, unsafe_allow_html=True)
 
 
+def render_incident_location_card(result):
+    """Display the human-readable accident location and coordinates."""
+    incident_loc = result.get("incident_location", {})
+    address = incident_loc.get("address", "Location not specified")
+    lat = incident_loc.get("lat", "?")
+    lon = incident_loc.get("lon", "?")
+    st.markdown(
+        f"""<div style="
+            background-color: #111111;
+            border-left: 4px solid #38BDF8;
+            padding: 12px 18px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+        ">
+            <div style="color: #94A3B8; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;">
+                📍 Incident Location
+            </div>
+            <div style="color: #F1F5F9; font-size: 1.05rem; font-weight: 600; margin-top: 4px;">
+                {address}
+            </div>
+            <div style="color: #64748B; font-size: 0.8rem; margin-top: 2px;">
+                {lat}, {lon}
+            </div>
+        </div>""",
+        unsafe_allow_html=True
+    )
+
+
 def render_map_with_pins(result):
     """Pydeck map with labeled pins and hover tooltips."""
     incident_loc = result.get("incident_location", {})
@@ -392,7 +421,7 @@ def render_map_with_pins(result):
         "lon": incident_loc.get("lon"),
         "name": "🚨 Accident Site",
         "kind": "Incident",
-        "detail": "Bystander-reported location",
+        "detail": incident_loc.get("address", "Bystander-reported location"),
         "color": [239, 68, 68, 230],
         "radius": 200,
     })
@@ -535,6 +564,7 @@ def render_bystander_result(result):
     priority = triage.get("priority", "P3")
 
     render_priority_banner(priority)
+    render_incident_location_card(result)
 
     col1, col2 = st.columns([1, 1])
 
@@ -773,10 +803,10 @@ def render_bystander_view():
     with st.expander("🎙 Speak your report (Beta)", expanded=False):
         st.markdown("""
         Click the microphone, describe the accident, click stop. Transcription will fill the textarea below.
-        
+
         _Runs locally with faster-whisper — no internet required for transcription_
         """)
-        
+
         audio = mic_recorder(
             start_prompt="🔴 Start recording",
             stop_prompt="⏹ Stop recording",
@@ -849,6 +879,10 @@ def render_bystander_view():
                     progress_callback=progress_callback
                 )
 
+                # Inject human-readable address (UI-side enrichment, doesn't require pipeline changes)
+                if "incident_location" in result and isinstance(result["incident_location"], dict):
+                    result["incident_location"]["address"] = DEFAULT_INCIDENT_ADDRESS
+
                 st.session_state.current_result = result
                 st.session_state.er_queue.append(result)
 
@@ -883,10 +917,12 @@ def render_er_alert_card(result):
     info = PRIORITY_INFO.get(priority, PRIORITY_INFO["P3"])
     handoff = result.get("handoff", {})
     hospital = result.get("hospital") or {}
+    incident_loc = result.get("incident_location") or {}
 
     incoming_alert = handoff.get("incoming_alert", "Incoming trauma patient")
     hospital_name = hospital.get("name", "Unassigned")
     eta_min = hospital.get("eta_min", "?")
+    incident_address = incident_loc.get("address", "Unknown location")
 
     pulse_class = "priority-banner-p1" if info["pulse"] else ""
 
@@ -918,7 +954,7 @@ def render_er_alert_card(result):
                     {incoming_alert}
                 </div>
                 <div style="color: #94A3B8; font-size: 0.85rem;">
-                    🏥 {hospital_name} · ⏱ ETA {eta_min} min
+                    📍 {incident_address} → 🏥 {hospital_name} · ⏱ ETA {eta_min} min
                 </div>
             </div>
         </div>
